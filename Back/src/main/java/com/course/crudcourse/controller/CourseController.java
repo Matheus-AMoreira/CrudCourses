@@ -2,6 +2,7 @@ package com.course.crudcourse.controller;
 
 import java.util.List;
 
+import com.course.crudcourse.dto.CourseDTO;
 import com.course.crudcourse.service.CourseService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -25,27 +26,25 @@ public class CourseController {
     }
 
     @GetMapping
-    public @ResponseBody List<Course> list() {
+    public @ResponseBody List<CourseDTO> list() {
         return courseService.list();
     }
 
     @GetMapping("/{id}")
-    public Course findById(@PathVariable @NotNull @Positive Long id){
+    public CourseDTO findById(@PathVariable @NotNull @Positive Long id){
         return  courseService.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(code= HttpStatus.CREATED)
-    public Course create(@RequestBody @Valid Course course){
+    public CourseDTO create(@RequestBody @Valid CourseDTO course){
         return courseService.create(course);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Course> update(@PathVariable @NotNull @Positive Long id,
-                                         @RequestBody @Valid Course course){
-        return  courseService.update(id, course)
-                .map(recordFound -> ResponseEntity.ok().body(recordFound))
-                .orElse(ResponseEntity.notFound().build());
+    public CourseDTO update(@PathVariable @NotNull @Positive Long id,
+                                         @RequestBody @Valid @NotNull CourseDTO course){
+        return  courseService.update(id, course);
     }
 
     @DeleteMapping("/{id}")
