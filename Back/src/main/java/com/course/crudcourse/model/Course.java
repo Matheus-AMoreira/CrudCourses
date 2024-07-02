@@ -2,8 +2,6 @@ package com.course.crudcourse.model;
 
 import com.course.crudcourse.enums.Category;
 import com.course.crudcourse.enums.Status;
-import com.course.crudcourse.enums.converters.CategoryConverter;
-import com.course.crudcourse.enums.converters.StatusConverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.*;
@@ -13,6 +11,9 @@ import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.validator.constraints.Length;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -38,4 +39,7 @@ public class Course {
     @NotNull
     @Column(length = 10, nullable = false)
     private Status status = Status.ACTIVE;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "course")
+    private List<Lesson> lessons = new ArrayList<>();
 }
