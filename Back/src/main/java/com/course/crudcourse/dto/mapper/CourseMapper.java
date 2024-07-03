@@ -1,15 +1,25 @@
 package com.course.crudcourse.dto.mapper;
 
 import com.course.crudcourse.dto.CourseDTO;
+import com.course.crudcourse.dto.LessonDTO;
 import com.course.crudcourse.enums.Category;
 import com.course.crudcourse.model.Course;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CourseMapper {
 
     public CourseDTO toDTO(Course course){
-        return new CourseDTO(course.getId(), course.getName(), course.getCategory().getValue());
+        if (course == null){
+            return null;
+        }
+        List<LessonDTO> lessons = course.getLessons().stream()
+                .map(lesson -> new LessonDTO(lesson.getId(), lesson.getName(), lesson.getYoutubeUrl()))
+                .collect(Collectors.toList());
+        return new CourseDTO(course.getId(), course.getName(), course.getCategory().getValue(), lessons);
     }
 
     public Course toEntity(CourseDTO courseDTO){
