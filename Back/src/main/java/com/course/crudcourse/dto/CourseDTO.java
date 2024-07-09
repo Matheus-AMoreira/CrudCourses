@@ -12,6 +12,6 @@ import java.util.List;
 public record CourseDTO(
         Long _id,
         @NotBlank @NotNull @Length(min = 5, max = 100) String name,
-        @NotNull @Length(min = 5, max = 10) @Pattern(regexp = "Back-end | Front-end") String category,
+        @NotNull @Length(max = 10) @Pattern(regexp = "Back-end | Front-end") String category,
         @NotNull @NotEmpty @Valid List<LessonDTO> lessons) {
 }
