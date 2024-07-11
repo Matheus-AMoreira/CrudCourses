@@ -1,17 +1,16 @@
 package com.course.crudcourse.controller;
 
-import java.util.List;
-
 import com.course.crudcourse.dto.CourseDTO;
+import com.course.crudcourse.dto.CoursePageDTO;
 import com.course.crudcourse.service.CourseService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import com.course.crudcourse.model.Course;
 
 @Validated
 @RestController
@@ -25,8 +24,9 @@ public class CourseController {
     }
 
     @GetMapping
-    public List<CourseDTO> list() {
-        return courseService.list();
+    public CoursePageDTO list(@RequestParam(defaultValue = "0") @PositiveOrZero int page,
+                              @RequestParam(defaultValue = "10") @Positive @Max(100) int size) {
+        return courseService.list(page, size);
     }
 
     @GetMapping("/{id}")
