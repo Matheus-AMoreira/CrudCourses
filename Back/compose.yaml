@@ -1,0 +1,10 @@
+services:
+  mysql:
+    image: 'mysql:8.0.38'
+    environment:
+      - 'MYSQL_DATABASE=CoursesCRUD'
+      - 'MYSQL_PASSWORD=password'
+      - 'MYSQL_ROOT_PASSWORD=password'
+      - 'MYSQL_USER=user'
+    ports:
+      - '3306'
