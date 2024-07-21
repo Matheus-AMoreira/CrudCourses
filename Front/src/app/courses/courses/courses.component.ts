@@ -55,6 +55,7 @@ export class CoursesComponent implements OnInit {
           return of({ courses: [], totalElements: 0, totalPages: 0 })
         })
       );
+      console.log(this.courses$)
   }
 
   onError(errorMsg: string) {

@@ -2,7 +2,7 @@ package com.course.crudcourse.enums;
 
 public enum Status {
 
-    ACTIVE("Active"), INATIVe("Inative");
+    ACTIVE("Ativo"), INATIVe("Inativo");
 
     private String value;
 

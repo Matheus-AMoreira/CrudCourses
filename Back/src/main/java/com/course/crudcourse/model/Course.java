@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@SQLDelete(sql = "UPDATE Course SET status = 'Inativo' WHERE id = ?")
+@Table(name = "course")
+@SQLDelete(sql = "UPDATE course SET status = 'Inativo' WHERE id = ?")
 @SQLRestriction("status = 'Ativo'")
 public class Course {
 

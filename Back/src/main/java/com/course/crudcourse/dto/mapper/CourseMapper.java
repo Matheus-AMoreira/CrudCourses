@@ -25,13 +25,13 @@ public class CourseMapper {
 
     public Course toEntity(CourseDTO courseDTO){
 
-        if (courseDTO != null){
+        if (courseDTO == null){
             return null;
         }
 
         Course course = new Course();
-        if(courseDTO._id() != null){
-            course.setId(courseDTO._id());
+        if(courseDTO.id() != null){
+            course.setId(courseDTO.id());
         }
         course.setName(courseDTO.name());
         course.setCategory(convertCategoryValue(courseDTO.category()));
