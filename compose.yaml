@@ -1,6 +1,6 @@
 services:
   mysql:
-    image: 'mysql:8.0.38'
+    image: 'mysql'
     environment:
       - 'MYSQL_DATABASE=CoursesCRUD'
       - 'MYSQL_PASSWORD=password'
