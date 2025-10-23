@@ -1,0 +1,36 @@
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      # Variáveis de ambiente para o MySQL
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: coursescrud
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+  # Serviço Backend (Spring Boot)
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: dockerfile-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+  
+  # Serviço Frontend (Angular)
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: dockerfile-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+volumes:
+  db-data: 
+    driver: local
