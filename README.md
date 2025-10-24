@@ -4,7 +4,7 @@ Esse projeto permite que seja criado um curso e a ele seja atribuído lições c
 
 ## ✅ Pré-requisitos
 
-Antes de começar, você vai precisar ter instalado 0 [Docker](https://www.docker.com/) para a containerização dos componentes da aplicação.
+Antes de começar, você vai precisar ter instalado o [Docker](https://www.docker.com/) para a containerização dos componentes da aplicação.
 
 ## 📀 Como Rodar o Projeto
 
@@ -28,7 +28,7 @@ A aplicação estará disponível nos seguintes endereços:
 * **Backend (Spring Boot):** [http://localhost:8080](http://localhost:8080)
 * **Banco de dados (MySQL):** [http://localhost:3306](http://localhost:3306)
 
-**Nota sobre Configurações:** Por padrão, o backend aceita requisições apenas da origem `http://localhost:4200`. Se você precisar alterar a porta do frontend, lembre-se de atualizar a configuração de CORS no arquivo [WebConfig.java](backend\src\main\java\com\course\crudcourse\config\WebConfig.java) do backend.
+**Nota sobre Configurações:** Por padrão, o backend aceita requisições apenas da origem `http://localhost:4200`. Se você precisar alterar a porta do frontend, lembre-se de atualizar a configuração de CORS no arquivo [WebConfig.java](backend/src/main/java/com/course/crudcourse/config/WebConfig.java) do backend.
 
 ## 🧾️ Modelo de Entidade Relacional
 
