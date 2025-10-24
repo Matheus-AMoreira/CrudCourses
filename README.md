@@ -1,50 +1,64 @@
 ## 💻 Projeto
 
-Esse projeto permite que seja criado um curso e a ele seja atribuído lições contendo link para os vídeos.
+Esse projeto permite que seja criado um curso e a ele seja atribuído lições contendo um nome e o link para os vídeos do YouTube.
 
-## 📀 Como rodar
+## ✅ Pré-requisitos
 
-Antes de iniciar a aplicação é necessário instalar o [Docker](https://www.docker.com/) para que o Docker Compose consiga gerar um container com o banco de dados MySQL, depois basta apenas iniciar a aplicação utilizando no ROOT o comando "mvn spring-boot:run" ou utilizar uma IDE.
+Antes de começar, você vai precisar ter instalado 0 [Docker](https://www.docker.com/) para a containerização dos componentes da aplicação.
 
-## 🧾️ Modelo de entidade relacional
+## 📀 Como Rodar o Projeto
+
+1.  Clone o repositório:
+    ```bash
+    git clone https://github.com/Matheus-AMoreira/CrudCourses.git
+    ```
+
+2.  Navegue até a pasta raiz do projeto:
+    ```bash
+    cd CrudCourses
+    ```
+
+3.  Execute o Docker Compose para construir as imagens e iniciar os containers:
+    ```bash
+    docker-compose up --build
+    ```
+
+A aplicação estará disponível nos seguintes endereços:
+* **Frontend (Angular):** [http://localhost:4200](http://localhost:4200)
+* **Backend (Spring Boot):** [http://localhost:8080](http://localhost:8080)
+* **Banco de dados (MySQL):** [http://localhost:3306](http://localhost:3306)
+
+**Nota sobre Configurações:** Por padrão, o backend aceita requisições apenas da origem `http://localhost:4200`. Se você precisar alterar a porta do frontend, lembre-se de atualizar a configuração de CORS no arquivo [WebConfig.java](backend\src\main\java\com\course\crudcourse\config\WebConfig.java) do backend.
+
+## 🧾️ Modelo de Entidade Relacional
 
 <p>
- <img src="./github/CourseDB.png" ALT="Diagrama de Entidade e Relacionamento">
+  <img src="./github/CourseDB.png" alt="Diagrama de Entidade e Relacionamento">
 </p>
 
-## 🚪 EndPoints da aplicação
+## 🚪 Endpoints da API
 
-Cursos(Course):
+A URL base da API é `http://localhost:8080/api/courses`.
 
-Metodos Get:
-- /api/courses -> Devolve todos os cursos registrados
-- /api/courses/{id} -> Fornece um curso específico através de um ID fornecido
-
-Metodo Post:
-- /api/courses -> Cria um curso
-
-Metodo Put:
-- /api/courses -> Atualiza os detalhes de um curso
-
-Metodo Delete:
-- /api/courses/{id} -> Deleta um curso inteiro através de seu ID
-
-## 🔧 Tecnologias
+| Método | Endpoint          | Descrição                                 |
+| :----- | :---------------- | :---------------------------------------- |
+| `GET`  | `/`               | Retorna todos os cursos registrados.      |
+| `GET`  | `/{id}`           | Retorna um curso específico pelo seu ID.  |
+| `POST` | `/`               | Cria um novo curso.                       |
+| `PUT`  | `/{id}`           | Atualiza os detalhes de um curso pelo ID. |
+| `DELETE`| `/{id}`          | Deleta um curso pelo seu ID.              |
 
 
-Foi usado nesse projeto :
+## 🔧 Tecnologias Utilizadas
+- **Frontend:** [Angular](https://angular.dev/)
+- **Backend:** [Spring Boot](https://spring.io/projects/spring-boot)
+- **Banco de Dados:** [MySQL](https://www.mysql.com/)
+- **Containerização:** [Docker](https://www.docker.com/)
 
-- [Maven](https://maven.apache.org/)
-- [Spring Boot](https://spring.io/projects/spring-boot)
-
-Dependências Maven:
+#### Dependências Principais do Spring Boot
 - [Hibernate](https://hibernate.org/orm/)
 - [Spring Web](https://mvnrepository.com/artifact/org.springframework/spring-web)
 - [MySQL Driver](https://mvnrepository.com/artifact/com.mysql/mysql-connector-j)
 - [Spring Validation](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation)
 - [Spring Boot DevTools](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools)
-- [Docker Compose](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-docker-compose/3.1.1)
-
-Programas necessários:
-- [MySQL](https://www.mysql.com/)
-- [Docker](https://www.docker.com/)
+- [Lombok](https://mvnrepository.com/artifact/org.projectlombok/lombok)
