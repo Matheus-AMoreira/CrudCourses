@@ -1,49 +1,13 @@
-# ----------------------------------------------------------------
-# Estágio 1: Build da Aplicação com Maven (Builder)
-# ----------------------------------------------------------------
-# Usamos uma imagem oficial que já contém Maven e o JDK 17 (conforme seu pom.xml).
-# A tag 'eclipse-temurin' é uma build OpenJDK de alta qualidade e bem mantida.
-# 'AS build' nomeia este estágio para que possamos referenciá-lo depois.
-FROM maven:3.9-eclipse-temurin-17 AS build
+FROM maven:sapmachine
 
-# Define o diretório de trabalho dentro do container.
 WORKDIR /app
 
-# Copia o arquivo de definição do projeto primeiro.
-# Isso otimiza o cache do Docker. As dependências só serão baixadas novamente se o pom.xml mudar.
 COPY pom.xml .
 
-# Baixa todas as dependências do projeto para aproveitar o cache de camadas do Docker.
-RUN mvn dependency:go-offline
+RUN mvn dependency:resolve
 
-# Agora copia todo o resto do código-fonte (a pasta src).
-COPY src ./src
+COPY . .
 
-# Executa o build do Maven para compilar e empacotar a aplicação em um arquivo .jar.
-# '-DskipTests' é uma boa prática para builds de imagem, pois os testes devem ser executados
-# em um passo separado do seu pipeline de CI/CD.
-RUN mvn package -DskipTests
+RUN mvn install -e -DskipTests
 
-
-# ----------------------------------------------------------------
-# Estágio 2: Execução da Aplicação (Runner)
-# ----------------------------------------------------------------
-# Usamos uma imagem JRE (Java Runtime Environment) baseada em Alpine Linux.
-# Ela é extremamente leve, pois não contém o compilador e outras ferramentas de desenvolvimento,
-# apenas o necessário para EXECUTAR a aplicação.
-FROM eclipse-temurin:17-jre-alpine
-
-# Define o diretório de trabalho.
-WORKDIR /app
-
-# Copia o arquivo .jar que foi gerado no estágio 'build' para a imagem final.
-# Usamos um wildcard (*) porque o nome do JAR geralmente inclui a versão (ex: app-0.0.1-SNAPSHOT.jar).
-# O arquivo é renomeado para 'app.jar' para facilitar o comando de execução.
-COPY --from=build /app/target/*.jar app.jar
-
-# Expõe a porta que a aplicação Spring Boot usa por padrão (8080).
-# Isso informa ao Docker que o container escuta nesta porta.
-EXPOSE 8080
-
-# Comando para iniciar a aplicação Java quando o container for executado.
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["mvn", "spring-boot:run", "-Dspring-boot.run.profiles=docker"]

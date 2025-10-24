@@ -10,15 +10,17 @@ import { CoursePage } from '../model/course-page';
 })
 export class CoursesService {
 
-  private readonly API = '/api/courses';
+  private readonly API = 'http://localhost:8080/api/courses';
 
   constructor(private httpClient: HttpClient) { }
 
   list(page = 1, pageSize = 10) {
-    return this.httpClient.get<CoursePage>(this.API, { params: { page, pageSize } })
+    const result = this.httpClient.get<CoursePage>(this.API, { params: { page, pageSize } })
       .pipe(
         first(),
       );
+      console.log(result)
+      return result 
   }
 
   loadById(id: string) {
