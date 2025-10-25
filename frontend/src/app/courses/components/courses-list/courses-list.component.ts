@@ -10,7 +10,6 @@ import { MatTableModule } from '@angular/material/table';
     selector: 'app-courses-list',
     templateUrl: './courses-list.component.html',
     styleUrls: ['./courses-list.component.scss'],
-    standalone: true,
     imports: [MatTableModule, MatIconModule, MatButtonModule, CategoryPipe]
 })
 export class CoursesListComponent implements OnInit {

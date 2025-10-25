@@ -21,7 +21,6 @@ import { MatCardModule } from '@angular/material/card';
     selector: 'app-courses',
     templateUrl: './courses.component.html',
     styleUrls: ['./courses.component.scss'],
-    standalone: true,
     imports: [MatCardModule, MatToolbarModule, CoursesListComponent, MatPaginatorModule, MatProgressSpinnerModule, AsyncPipe]
 })
 export class CoursesComponent implements OnInit {

@@ -21,7 +21,6 @@ import { MatCardModule } from '@angular/material/card';
     selector: 'app-course-form',
     templateUrl: './course-form.component.html',
     styleUrls: ['./course-form.component.scss'],
-    standalone: true,
     imports: [MatCardModule, MatToolbarModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatOptionModule, MatButtonModule, MatIconModule]
 })
 export class CourseFormComponent implements OnInit {

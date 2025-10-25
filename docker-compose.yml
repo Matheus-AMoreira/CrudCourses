@@ -4,7 +4,6 @@ services:
     container_name: mysql
     restart: always
     environment:
-      # Variáveis de ambiente para o MySQL
       MYSQL_ROOT_PASSWORD: mysql
       MYSQL_DATABASE: coursescrud
     ports:
@@ -12,7 +11,6 @@ services:
     volumes:
       - db-data:/var/lib/mysql
 
-  # Serviço Backend (Spring Boot)
   backend:
     container_name: backend
     build: 
@@ -22,8 +20,7 @@ services:
       - "8080:8080"
     depends_on:
       - mysql
-  
-  # Serviço Frontend (Angular)
+      
   frontend:
     container_name: frontend
     build: 

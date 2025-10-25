@@ -1,11 +1,12 @@
 @use '@angular/material' as mat;
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
-$custom-app-primary: mat.define-palette(mat.$purple-palette);
-$custom-app-secondary: mat.define-palette(mat.$cyan-palette);
-$custom-app-warn: mat.define-palette(mat.$pink-palette);
+$custom-app-primary: mat.m2-define-palette(mat.$m2-purple-palette);
+$custom-app-secondary: mat.m2-define-palette(mat.$m2-cyan-palette);
+$custom-app-warn: mat.m2-define-palette(mat.$m2-pink-palette);
 
-$custom-theme: mat.define-light-theme(
+$custom-theme: mat.m2-define-light-theme(
   (
     color: (
       primary: $custom-app-primary,
