@@ -56,6 +56,7 @@ public class CourseMapper {
         return switch (value){
             case "Front-end" -> Category.FRONTEND;
             case "Back-end" -> Category.BACKEND;
+            case "DataBase" -> Category.DATABASE;
             default -> throw new IllegalArgumentException("Categoria inválida: " + value);
         };
     }
